@@ -1,17 +1,17 @@
-def parse(formula, i=0):
+def parse_species(species, i=0):
     atoms_dict = {}
-    while i < len(formula):
-        if formula[i].isupper():
-            current_element = formula[i]
+    while i < len(species):
+        if species[i].isupper():
+            current_element = species[i]
             i += 1
-            while i < len(formula) and formula[i].islower():
-                current_element += formula[i]
+            while i < len(species) and species[i].islower():
+                current_element += species[i]
                 i += 1
-            if i < len(formula) and formula[i].isdigit():
-                current_coeff = formula[i]
+            if i < len(species) and species[i].isdigit():
+                current_coeff = species[i]
                 i += 1
-                while i < len(formula) and formula[i].isdigit():
-                    current_coeff += formula[i]
+                while i < len(species) and species[i].isdigit():
+                    current_coeff += species[i]
                     i += 1
             else:
                 current_coeff = 1
