@@ -48,3 +48,10 @@ def parse_species(species, i=0):
             raise ValueError("unknown character")
 
     return atoms_dict, i
+
+
+def split_sides(equation):
+    parts = equation.split("->")
+    if len(parts) != 2:
+        raise ValueError("equation must contain only one ->")
+    return parts[0].strip(), parts[1].strip()
