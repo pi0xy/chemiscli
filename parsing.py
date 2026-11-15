@@ -63,3 +63,15 @@ def split_species(side):
         raise ValueError("empty species")
     return species
 
+
+def parse_equation(equation):
+    sides = split_sides(equation)
+    reactants, products = [split_species(x) for x in sides]
+    species_list = []
+    for reactant in reactants:
+        species_list.append((reactant, parse_species(reactant)[0], 1))
+    for product in products:
+        species_list.append((product, parse_species(product)[0], -1))
+    return species_list
+
+print(parse_equation("H2 + O2 -> H2O"))
