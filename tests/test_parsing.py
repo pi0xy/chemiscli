@@ -1,5 +1,5 @@
 import pytest
-from parsing import parse_species, split_sides
+from parsing import parse_species, split_sides, split_species
 
 def test_parse_species():
     assert parse_species("H2O")[0] == {"H": 2, "O": 1}
@@ -13,3 +13,12 @@ def test_parse_species():
 
 def test_split_sides():
     assert split_sides("C2H6 + O2 -> CO2 + H2O") == ("C2H6 + O2", "CO2 + H2O")
+
+def test_split_species():
+    assert split_species("C2H6 + O2") == ["C2H6", "O2"]
+    assert split_species("H2O") == ["H2O"]
+
+def test_split_species_empty():
+    for incorrect in ["H2 + + O2", "+ O2", "O2 +"]:
+        with pytest.raises(ValueError):
+            split_species(incorrect)

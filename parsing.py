@@ -55,3 +55,11 @@ def split_sides(equation):
     if len(parts) != 2:
         raise ValueError("equation must contain only one ->")
     return parts[0].strip(), parts[1].strip()
+
+def split_species(side):
+    species = side.split("+")
+    species = [x.strip(' ') for x in species]
+    if "" in species:
+        raise ValueError("empty species")
+    return species
+
