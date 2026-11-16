@@ -1,4 +1,5 @@
 from fractions import Fraction
+from math import gcd, lcm
 
 def build_matrix(species_list):
 
@@ -49,3 +50,30 @@ def rref(matrix):
                     matrix[other][k] -= factor * matrix[row][k]
         column += 1
     return matrix
+
+
+def solve_coefficients(matrix):
+    column_count = len(matrix[0])
+
+    free = column_count - 1
+
+    x = []
+    for r in range(free):
+        x.append(-matrix[r][free])
+    x.append(Fraction(1))
+
+    multiple = 1
+    for value in x:
+        multiple = lcm(multiple, value.denominator)
+
+    coefficients = []
+    for value in x:
+        coefficients.append(int(value*multiple))
+    return coefficients
+
+
+matrix = [[2, 0, -1,  0],
+          [6, 0,  0, -2],
+          [0, 2, -2, -1]]
+
+print(rref(matrix))
