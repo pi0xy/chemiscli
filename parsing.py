@@ -73,5 +73,3 @@ def parse_equation(equation):
     for product in products:
         species_list.append((product, parse_species(product)[0], -1))
     return species_list
-
-print(parse_equation("H2 + O2 -> H2O"))
