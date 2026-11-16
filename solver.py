@@ -1,3 +1,5 @@
+from fractions import Fraction
+
 def build_matrix(species_list):
 
     elements = []
@@ -19,6 +21,7 @@ def build_matrix(species_list):
 
 
 def rref(matrix):
+    matrix = [[Fraction(value) for value in row] for row in matrix]
     column = 0
     row_count = len(matrix)
     column_count = len(matrix[0])
