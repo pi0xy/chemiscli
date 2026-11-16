@@ -1,4 +1,4 @@
-from solver import build_matrix, rref, solve_coefficients
+from solver import build_matrix, rref, solve_coefficients, balance
 from fractions import Fraction
 
 def test_build_matrix():
@@ -15,3 +15,7 @@ def test_solve_coefficients():
               [Fraction(0, 1), Fraction(1, 1), Fraction(0, 1), Fraction(-7, 6)],
               [Fraction(0, 1), Fraction(0, 1), Fraction(1, 1), Fraction(-2, 3)]]
     assert solve_coefficients(matrix) == [2, 7, 4, 6]
+
+
+def test_balance():
+    assert balance("C2H6 + O2 -> CO2 + H2O") == "2 C2H6 + 7 O2 -> 4 CO2 + 6 H2O"

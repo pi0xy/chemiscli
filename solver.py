@@ -1,3 +1,4 @@
+from parsing import parse_equation
 from fractions import Fraction
 from math import gcd, lcm
 
@@ -72,8 +73,27 @@ def solve_coefficients(matrix):
     return coefficients
 
 
-matrix = [[2, 0, -1,  0],
-          [6, 0,  0, -2],
-          [0, 2, -2, -1]]
+def balance(equation):
+    species_list = parse_equation(equation)
+    coefficients = solve_coefficients(rref(build_matrix(species_list)))
 
-print(rref(matrix))
+    reactants = []
+    products = []
+
+    for i in range(len(species_list)):
+        name = species_list[i][0]
+        sign = species_list[i][2]
+        coefficient = coefficients[i]
+
+        if coefficient == 1:
+            current_species = name
+        else:
+            current_species = str(coefficient) + " " + name
+
+
+        if sign == 1:
+            reactants.append(current_species)
+        else:
+            products.append(current_species)
+
+    return " + ".join(reactants) + " -> " + " + ".join(products)
